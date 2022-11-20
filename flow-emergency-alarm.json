@@ -1,5 +1,222 @@
 [
     {
+        "id": "3db8327e14bf9161",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8a45cb67bda24787",
+        "type": "arduino in",
+        "z": "3db8327e14bf9161",
+        "name": "BOTAO",
+        "pin": "5",
+        "state": "INPUT",
+        "arduino": "497215fe4b29889f",
+        "x": 310,
+        "y": 440,
+        "wires": [
+            [
+                "ca1965796b4103f7"
+            ]
+        ]
+    },
+    {
+        "id": "2004e99a73293d2e",
+        "type": "arduino out",
+        "z": "3db8327e14bf9161",
+        "name": "LED",
+        "pin": "6",
+        "state": "OUTPUT",
+        "arduino": "497215fe4b29889f",
+        "x": 1170,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "ca1965796b4103f7",
+        "type": "change",
+        "z": "3db8327e14bf9161",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "0",
+                "fromt": "num",
+                "to": "{\"id\":\"Arduino UNO\",\"botao\":5,\"value\":false}",
+                "tot": "json"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "1",
+                "fromt": "num",
+                "to": "{\"id\":\"Arduino UNO\",\"botao\":5,\"value\":true}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 440,
+        "wires": [
+            [
+                "7c28b48787884e5e"
+            ]
+        ]
+    },
+    {
+        "id": "363baa07ad72bbab",
+        "type": "arduino out",
+        "z": "3db8327e14bf9161",
+        "name": "BUZZ",
+        "pin": "7",
+        "state": "OUTPUT",
+        "arduino": "497215fe4b29889f",
+        "x": 1170,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "62e29fae76d4bceb",
+        "type": "mqtt in",
+        "z": "3db8327e14bf9161",
+        "name": "",
+        "topic": "serialPort/button",
+        "qos": "0",
+        "datatype": "json",
+        "broker": "984a7fa7b7acdce1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 340,
+        "y": 520,
+        "wires": [
+            [
+                "2e53e3df3e48fcb6"
+            ]
+        ]
+    },
+    {
+        "id": "2e53e3df3e48fcb6",
+        "type": "switch",
+        "z": "3db8327e14bf9161",
+        "name": "",
+        "property": "payload.value",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 570,
+        "y": 640,
+        "wires": [
+            [
+                "9b24afe8789b3f4b"
+            ],
+            [
+                "89432f9c0a05c208"
+            ]
+        ]
+    },
+    {
+        "id": "9b24afe8789b3f4b",
+        "type": "change",
+        "z": "3db8327e14bf9161",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 600,
+        "wires": [
+            [
+                "2004e99a73293d2e",
+                "363baa07ad72bbab"
+            ]
+        ]
+    },
+    {
+        "id": "89432f9c0a05c208",
+        "type": "change",
+        "z": "3db8327e14bf9161",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 680,
+        "wires": [
+            [
+                "964189e04f0f1774"
+            ]
+        ]
+    },
+    {
+        "id": "964189e04f0f1774",
+        "type": "delay",
+        "z": "3db8327e14bf9161",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 980,
+        "y": 680,
+        "wires": [
+            [
+                "2004e99a73293d2e",
+                "363baa07ad72bbab"
+            ]
+        ]
+    },
+    {
         "id": "7c28b48787884e5e",
         "type": "mqtt out",
         "z": "3db8327e14bf9161",
@@ -16,6 +233,38 @@
         "x": 810,
         "y": 440,
         "wires": []
+    },
+    {
+        "id": "497215fe4b29889f",
+        "type": "arduino-board",
+        "device": "/dev/tty.usbmodem111201"
+    },
+    {
+        "id": "984a7fa7b7acdce1",
+        "type": "mqtt-broker",
+        "name": "HiveMQ",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
     },
     {
         "id": "30d81fee98ae6f53",
@@ -42,7 +291,6 @@
         "willPayload": "",
         "willMsg": {},
         "userProps": "",
-        "sessionExpiry": "",
-        "credentials": {}
+        "sessionExpiry": ""
     }
 ]
